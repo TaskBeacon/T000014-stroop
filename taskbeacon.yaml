@@ -1,0 +1,11 @@
+id: T000014
+slug: stroop
+title: "Stroop Task"
+acquisition: eeg
+variant: baseline
+cognitive_domain: []
+maturity: smoke_tested
+version:
+  release_tag: ""
+evidence: []
+maintainer: []
