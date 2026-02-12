@@ -1,4 +1,4 @@
-from psyflow import StimUnit
+﻿from psyflow import StimUnit
 from functools import partial
 
 def run_trial(
@@ -7,7 +7,7 @@ def run_trial(
     settings,
     condition: str,           # e.g., 'congruent_red'
     stim_bank: dict,
-    trigger_sender=None,
+    trigger_runtime=None,
 ):
     """
     Runs a single trial of the Stroop task.
@@ -19,13 +19,13 @@ def run_trial(
         condition (str): A string defining the current trial's type,
                          e.g., "congruent_red".
         stim_bank: The stimulus bank containing all visual stimuli.
-        trigger_sender: The object responsible for sending EEG/fMRI triggers.
+        trigger_runtime: The object responsible for sending EEG/fMRI triggers.
 
     Returns:
         dict: A dictionary containing all data recorded for this trial.
     """
     trial_data = {"condition": condition}
-    make_unit = partial(StimUnit, win=win, kb=kb, triggersender=trigger_sender)
+    make_unit = partial(StimUnit, win=win, kb=kb, runtime=trigger_runtime)
 
     # --- 1. Determine trial properties from condition string ---
     stroop_type, color = condition.split('_')
@@ -82,3 +82,4 @@ def run_trial(
     make_unit(unit_label='iti').show(duration=settings.iti_duration).to_dict(trial_data)
 
     return trial_data
+
