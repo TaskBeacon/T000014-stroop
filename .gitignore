@@ -1,5 +1,9 @@
-# Ignore subject data files
 /data/
+/outputs/*
+!/outputs/.gitkeep
+outputs/human/
+outputs/qa/
+outputs/sim/
 src/__pycache__/
 
 # TaskBeacon housekeeping (generated artifacts)

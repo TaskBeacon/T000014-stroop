@@ -5,12 +5,12 @@
 | Field                | Value                                      |
 |----------------------|--------------------------------------------|
 | Name                 | Stroop Task                                |
-| Version              | main (1.0)                                 |
+| Version | main (1.1.0) |
 | URL / Repository     | https://github.com/TaskBeacon/T000014-stroop       |
 | Short Description    | A task measuring response inhibition and selective attention. |
 | Created By           | Zhipeng Cao (zhipeng30@foxmail.com)        |
-| Date Updated         | 2025/07/24                                 |
-| PsyFlow Version      | 0.1.0                                      |
+| Date Updated | 2026/02/16 |
+| PsyFlow Version | 0.1.8 |
 | PsychoPy Version     | 2025.1.1                                   |
 | Modality             | Behavior/EEG                               |
 | Language | Chinese |
@@ -68,13 +68,13 @@ Standard PsychoPy window settings for fullscreen display.
 | Name                     | Type      | Description                                           |
 |--------------------------|-----------|-------------------------------------------------------|
 | fixation                 | text      | Central cross `+`.                                    |
-| congruent_red            | text      | The word "Á∫? (Red) in red ink.                       |
-| congruent_green          | text      | The word "Áª? (Green) in green ink.                   |
-| incongruent_red          | text      | The word "Áª? (Green) in red ink.                     |
-| incongruent_green        | text      | The word "Á∫? (Red) in green ink.                     |
+| congruent_red            | text      | The word "? (Red) in red ink.                       |
+| congruent_green          | text      | The word "? (Green) in green ink.                   |
+| incongruent_red          | text      | The word "? (Green) in red ink.                     |
+| incongruent_green        | text      | The word "? (Red) in green ink.                     |
 | correct_feedback         | textbox   | "Ê≠£Á°Æ" (Correct) in white.                            |
 | incorrect_feedback       | textbox   | "ÈîôËØØ" (Incorrect) in white.                          |
-| no_response_feedback     | textbox   | "Êú™ÂèçÂ∫? (No Response) in white.                      |
+| no_response_feedback     | textbox   | "Êú™Âèç? (No Response) in white.                      |
 | instruction_text         | textbox   | Instructions explaining the task.                     |
 | block_break              | text      | Inter-block message showing accuracy.                 |
 | good_bye                 | text      | Final thank you message.                              |
@@ -86,7 +86,7 @@ Standard PsychoPy window settings for fullscreen display.
 | fixation              | 0.5                | fixation_duration  |
 | stimulus              | 2.0 (max response time) | stim_duration      |
 | feedback              | 0.5                | feedback_duration  |
-| iti                   | random 0.8‚Ä?.2     | iti_duration       |
+| iti                   | random 0.8?.2     | iti_duration       |
 
 ### e. Triggers
 

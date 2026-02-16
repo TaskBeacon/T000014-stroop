@@ -1,11 +1,13 @@
 id: T000014
 slug: stroop
-title: "Stroop Task"
+title: Stroop Task
 acquisition: eeg
 variant: baseline
 cognitive_domain: []
 maturity: smoke_tested
 version:
-  release_tag: ""
+  release_tag: ''
 evidence: []
 maintainer: []
+contracts:
+  psyflow_taps: v0.1.0
