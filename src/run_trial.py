@@ -2,7 +2,7 @@ from functools import partial
 
 from psyflow import StimUnit, set_trial_context
 
-# trial stages: cue -> anticipation -> target -> feedback
+# trial stages use task-specific phase labels via set_trial_context(...)
 _TRIAL_COUNTER = 0
 
 
@@ -49,19 +49,19 @@ def run_trial(
         }
     )
 
-    # cue / anticipation
+    # phase: pre_stim_fixation
     fixation_unit = make_unit(unit_label="fixation").add_stim(stim_bank.get("fixation"))
     set_trial_context(
         fixation_unit,
         trial_id=trial_id,
-        phase="anticipation",
+        phase="pre_stim_fixation",
         deadline_s=_deadline_s(settings.fixation_duration),
         valid_keys=list(settings.key_list),
         block_id=block_id,
         condition_id=str(condition),
         task_factors={
             "condition": str(condition),
-            "stage": "anticipation",
+            "stage": "pre_stim_fixation",
             "stroop_type": stroop_type,
             "color": color,
             "block_idx": block_idx,
@@ -73,19 +73,19 @@ def run_trial(
         onset_trigger=settings.triggers.get("fixation_onset"),
     ).to_dict(trial_data)
 
-    # target
+    # phase: stroop_response
     stim_unit = make_unit(unit_label="stimulus").add_stim(stim_bank.get(condition))
     set_trial_context(
         stim_unit,
         trial_id=trial_id,
-        phase="target",
+        phase="stroop_response",
         deadline_s=_deadline_s(settings.stim_duration),
         valid_keys=list(settings.key_list),
         block_id=block_id,
         condition_id=str(condition),
         task_factors={
             "condition": str(condition),
-            "stage": "target",
+            "stage": "stroop_response",
             "stroop_type": stroop_type,
             "color": color,
             "correct_key": str(correct_response),
@@ -106,7 +106,7 @@ def run_trial(
     )
     stim_unit.to_dict(trial_data)
 
-    # feedback
+    # outcome display
     response = stim_unit.get_state("response", False)
     hit = stim_unit.get_state("hit", False)
 
