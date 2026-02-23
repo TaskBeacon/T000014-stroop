@@ -1,26 +1,8 @@
 from functools import partial
 
-from psyflow import StimUnit, set_trial_context
+from psyflow import StimUnit, set_trial_context, next_trial_id
 
 # trial stages use task-specific phase labels via set_trial_context(...)
-_TRIAL_COUNTER = 0
-
-
-def _next_trial_id() -> int:
-    global _TRIAL_COUNTER
-    _TRIAL_COUNTER += 1
-    return _TRIAL_COUNTER
-
-
-def _deadline_s(value) -> float | None:
-    if isinstance(value, (int, float)):
-        return float(value)
-    if isinstance(value, (list, tuple)) and value:
-        try:
-            return float(max(value))
-        except Exception:
-            return None
-    return None
 
 
 def run_trial(
@@ -34,7 +16,7 @@ def run_trial(
     block_idx=None,
 ):
     """Run one Stroop trial."""
-    trial_id = _next_trial_id()
+    trial_id = next_trial_id()
     trial_data = {"condition": condition}
     make_unit = partial(StimUnit, win=win, kb=kb, runtime=trigger_runtime)
 
@@ -55,7 +37,7 @@ def run_trial(
         fixation_unit,
         trial_id=trial_id,
         phase="pre_stim_fixation",
-        deadline_s=_deadline_s(settings.fixation_duration),
+        deadline_s=settings.fixation_duration,
         valid_keys=list(settings.key_list),
         block_id=block_id,
         condition_id=str(condition),
@@ -79,7 +61,7 @@ def run_trial(
         stim_unit,
         trial_id=trial_id,
         phase="stroop_response",
-        deadline_s=_deadline_s(settings.stim_duration),
+        deadline_s=settings.stim_duration,
         valid_keys=list(settings.key_list),
         block_id=block_id,
         condition_id=str(condition),
