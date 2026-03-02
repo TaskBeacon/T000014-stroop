@@ -7,6 +7,24 @@ All notable development changes for `T000014-stroop` are documented here.
 ### Changed
 - Refactored `src/run_trial.py` to use `psyflow`'s native `next_trial_id()` and removed legacy internal `_next_trial_id` and `_deadline_s` boilerplate.
 
+## [1.1.2] - 2026-03-02
+
+### Added
+- Added full reference artifact bundle under `references/`:
+  - `references.yaml`
+  - `references.md`
+  - `parameter_mapping.md`
+  - `stimulus_mapping.md`
+  - `task_logic_audit.md`
+- Added standard responder entry file `responders/task_sampler.py`.
+
+### Changed
+- Updated sampler responder wiring to `responders.task_sampler:TaskSamplerResponder`.
+- Aligned sampler phase logic with runtime phase name `stroop_response`.
+- Updated `README.md` to current contract structure and added explicit `### Controller Logic` subsection.
+- Updated `taskbeacon.yaml` release tag, evidence list, and maintainer metadata.
+- Updated `main.py` finalize flow so goodbye screen does not terminate before save/close steps.
+
 ## [1.1.1] - 2026-02-18
 - Refactored responder context phase names in `src/run_trial.py` to task-specific labels (removed generic MID-style phase naming).
 - Updated stage comments in `src/run_trial.py` to phase-aligned labels for cleaner auditability.

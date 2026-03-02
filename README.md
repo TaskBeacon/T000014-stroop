@@ -1,130 +1,125 @@
 # Stroop Task
 
-![Maturity: smoke_tested](https://img.shields.io/badge/Maturity-smoke_tested-d97706?style=for-the-badge&labelColor=c2410c)
+![Maturity: smoke_tested](https://img.shields.io/badge/Maturity-smoke_tested-d97706?style=flat-square&labelColor=111827)
 
-| Field                | Value                                      |
-|----------------------|--------------------------------------------|
-| Name                 | Stroop Task                                |
-| Version | main (1.1.0) |
-| URL / Repository     | https://github.com/TaskBeacon/T000014-stroop       |
-| Short Description    | A task measuring response inhibition and selective attention. |
-| Created By           | Zhipeng Cao (zhipeng30@foxmail.com)        |
-| Date Updated | 2026/02/16 |
-| PsyFlow Version | 0.1.8 |
-| PsychoPy Version     | 2025.1.1                                   |
-| Modality             | Behavior/EEG                               |
+| Field | Value |
+|---|---|
+| Name | Stroop Task |
+| Version | v1.1.2 |
+| URL / Repository | https://github.com/TaskBeacon/T000014-stroop |
+| Short Description | Classic color-word Stroop task measuring interference control (congruent vs incongruent trials). |
+| Created By | Zhipeng Cao (zhipeng30@foxmail.com) |
+| Date Updated | 2026-03-02 |
+| PsyFlow Version | 0.1.9 |
+| PsychoPy Version | 2025.1.1 |
+| Modality | Behavior / EEG |
 | Language | Chinese |
 | Voice Name | zh-CN-YunyangNeural |
 
+## Run Modes
+
+- Human (default): `python main.py`
+- QA: `python main.py qa --config config/config_qa.yaml`
+- Scripted Sim: `python main.py sim --config config/config_scripted_sim.yaml`
+- Sampler Sim: `python main.py sim --config config/config_sampler_sim.yaml`
 
 ## 1. Task Overview
 
-The Stroop Task is a classic experimental paradigm used to assess selective attention and response inhibition. Participants are presented with a word (a color name) printed in a specific ink color. They are instructed to name the ink color of the word, ignoring the word itself. The task measures how efficiently a participant can focus on a target attribute (the ink color) and filter out distracting information (the word's meaning).
+This Stroop implementation presents Chinese color words in either congruent or incongruent ink colors. Participants respond to ink color while ignoring word meaning. The key outcomes are reaction time and accuracy differences between congruent and incongruent conditions.
 
 ## 2. Task Flow
 
 ### Block-Level Flow
 
-| Step                       | Description                                                                 |
-|----------------------------|-----------------------------------------------------------------------------|
-| Load Config                | Load task configuration from `config.yaml`.                                 |
-| Collect Subject Info       | Display a form to collect participant demographics.                         |
-| Setup Triggers             | Initialize the trigger sender for EEG/fMRI synchronization.                 |
-| Initialize Window/Input    | Create the PsychoPy window and keyboard handler.                            |
-| Load Stimuli               | Load all visual stimuli defined in the config using `StimBank`.             |
-| Show Instructions          | Present task instructions to the participant.                               |
-| Loop Over Blocks           | For each block: run trials, then compute and show block-level feedback.     |
-| Show Goodbye               | Display a final thank you message.                                          |
-| Save Data                  | Save all recorded trial data to a CSV file.                                 |
-| Close                      | Close the trigger port and quit PsychoPy.                                   |
+| Step | Description |
+|---|---|
+| Setup | Load config, initialize mode context (`human/qa/sim`), open PsychoPy window, load stimuli, initialize trigger runtime. |
+| Instruction | Show task instructions (`instruction_text`; optional voice in human mode). |
+| Block Loop | Generate conditions and run trial loop via `BlockUnit.run_trial(...)`. |
+| Block Summary | Compute block accuracy and show `block_break` screen. |
+| Finalize | Show `good_bye`, send `exp_end`, save CSV, close trigger runtime, quit PsychoPy. |
 
 ### Trial-Level Flow
 
-| Step                | Description                                                                 |
-|---------------------|-----------------------------------------------------------------------------|
-| Fixation            | Show a central fixation cross `(+)`.                                        |
-| Stimulus            | Present the Stroop stimulus (e.g., the word "Red" in green ink).            |
-| Response            | Record the participant's key press (`f` for red, `j` for green).            |
-| Feedback            | Display feedback (`Correct`, `Incorrect`, or `No Response`).                |
-| ITI                 | A blank screen shown for a random duration before the next trial.           |
-
-### Runtime Context Phases
-| Phase Label | Meaning |
+| Step | Description |
 |---|---|
-| `pre_stim_fixation` | pre stim fixation stage in `src/run_trial.py` responder context. |
-| `stroop_response` | stroop response stage in `src/run_trial.py` responder context. |
+| Fixation | Show fixation cross (`+`) for `fixation_duration`. |
+| Stroop Response | Show one condition stimulus (`congruent_*` / `incongruent_*`) and capture response within `stim_duration`. |
+| Feedback | Show `correct_feedback`, `incorrect_feedback`, or `no_response_feedback`. |
+| ITI | Blank interval sampled from `iti_duration`. |
+
+### Controller Logic
+
+No adaptive controller is used in this baseline Stroop variant.
 
 ## 3. Configuration Summary
 
 ### a. Subject Info
 
-| Field       | Meaning                    |
-|-------------|----------------------------|
-| subject_id  | Unique participant ID (3 digits). |
-| subname     | Participant's name (Pinyin). |
-| age         | Participant's age.         |
-| gender      | Participant's gender.      |
+| Field | Meaning |
+|---|---|
+| `subject_id` | Participant ID (3 digits). |
+| `subname` | Participant name (pinyin). |
+| `age` | Age (5-60). |
+| `gender` | `Male` or `Female`. |
 
 ### b. Window Settings
 
-Standard PsychoPy window settings for fullscreen display.
+| Parameter | Value |
+|---|---|
+| `window.size` | `[1920, 1080]` |
+| `window.units` | `deg` |
+| `window.fullscreen` | `true` |
+| `window.bg_color` | `gray` |
+| `window.monitor_width_cm` | `60` |
+| `window.monitor_distance_cm` | `72` |
 
 ### c. Stimuli
 
-| Name                     | Type      | Description                                           |
-|--------------------------|-----------|-------------------------------------------------------|
-| fixation                 | text      | Central cross `+`.                                    |
-| congruent_red            | text      | The word "? (Red) in red ink.                       |
-| congruent_green          | text      | The word "? (Green) in green ink.                   |
-| incongruent_red          | text      | The word "? (Green) in red ink.                     |
-| incongruent_green        | text      | The word "? (Red) in green ink.                     |
-| correct_feedback         | textbox   | "正确" (Correct) in white.                            |
-| incorrect_feedback       | textbox   | "错误" (Incorrect) in white.                          |
-| no_response_feedback     | textbox   | "未反? (No Response) in white.                      |
-| instruction_text         | textbox   | Instructions explaining the task.                     |
-| block_break              | text      | Inter-block message showing accuracy.                 |
-| good_bye                 | text      | Final thank you message.                              |
+| Name | Type | Description |
+|---|---|---|
+| `fixation` | `text` | Central `+` fixation. |
+| `congruent_red` | `text` | Character "红" in red. |
+| `congruent_green` | `text` | Character "绿" in green. |
+| `incongruent_red` | `text` | Character "绿" in red. |
+| `incongruent_green` | `text` | Character "红" in green. |
+| `correct_feedback` | `text` | Correct response message. |
+| `incorrect_feedback` | `text` | Incorrect response message. |
+| `no_response_feedback` | `text` | No-response message. |
+| `instruction_text` | `textbox` | Chinese task instructions. |
+| `block_break` | `text` | Block transition with accuracy summary. |
+| `good_bye` | `text` | End-of-task message. |
 
 ### d. Timing
 
-| Phase                 | Duration (s)        | Config Variable      |
-|------------------------|--------------------|--------------------|
-| fixation              | 0.5                | fixation_duration  |
-| stimulus              | 2.0 (max response time) | stim_duration      |
-| feedback              | 0.5                | feedback_duration  |
-| iti                   | random 0.8?.2     | iti_duration       |
+| Phase | Duration |
+|---|---|
+| `fixation_duration` | `0.5 s` |
+| `stim_duration` | `2.0 s` |
+| `feedback_duration` | `0.5 s` |
+| `iti_duration` | Random in `[0.8, 1.2] s` |
 
 ### e. Triggers
 
-| Event                    | Code  |
-|--------------------------|-------|
-| exp_onset                | 98    |
-| exp_end                  | 99    |
-| block_onset              | 100   |
-| block_end                | 101   |
-| fixation_onset           | 1     |
-| congruent_stim_onset     | 10    |
-| incongruent_stim_onset   | 20    |
-| red_key_press            | 30    |
-| green_key_press          | 31    |
-| feedback_correct_response | 51    |
-| feedback_incorrect_response | 52    |
-| feedback_no_response     | 53    |
-| feedback_onset           | 60    |
+| Event | Code |
+|---|---:|
+| `exp_onset` | 98 |
+| `exp_end` | 99 |
+| `block_onset` | 100 |
+| `block_end` | 101 |
+| `fixation_onset` | 1 |
+| `congruent_stim_onset` | 10 |
+| `incongruent_stim_onset` | 20 |
+| `red_key_press` | 30 |
+| `green_key_press` | 31 |
+| `feedback_correct_response` | 51 |
+| `feedback_incorrect_response` | 52 |
+| `feedback_no_response` | 53 |
 
 ## 4. Methods (for academic publication)
 
-In this experiment, participants performed a Stroop task to assess selective attention and response inhibition. Each trial began with a central fixation cross, displayed for 500 ms. Subsequently, a word was presented in the center of the screen for up to 2000 ms or until a response was made. Participants were instructed to respond to the ink color of the word while ignoring the word's meaning by pressing the 'f' key for red ink or the 'j' key for green ink. Following their response, feedback was provided for 500 ms, indicating whether the response was correct, incorrect, or if no response was made.
+Participants performed a computerized Stroop color-word task. Each trial started with a fixation cross, followed by a single Chinese color word rendered in either congruent or incongruent ink color. Participants were instructed to respond to the ink color (red vs green) while ignoring lexical meaning.
 
-The task included two types of stimuli: congruent trials, where the word and ink color matched (e.g., the word "Red" in red ink), and incongruent trials, where the word and ink color were mismatched (e.g., the word "Red" in green ink). These conditions were presented in a randomized order within each block.
+Stimuli remained on screen for up to 2 seconds or until response, followed by brief trial-wise feedback and a jittered inter-trial interval. The design included both congruent and incongruent trials within each block, enabling estimation of classical Stroop interference through reaction-time and accuracy contrasts.
 
-The task was structured into 3 blocks of 60 trials each (total 180 trials), with equal numbers of each condition (congruent-red, congruent-green, incongruent-red, incongruent-green) in each block. After each block, participants received feedback on their accuracy and were given the opportunity to rest before continuing to the next block. The inter-trial interval varied randomly between 800 and 1200 ms to prevent anticipatory responses.
-
-This design allows for the examination of cognitive control processes, specifically the ability to selectively attend to relevant information while suppressing interference from irrelevant information. The difference in performance (reaction time and accuracy) between congruent and incongruent trials provides a measure of the "Stroop effect," which reflects the cost of inhibiting conflicting information.
-
-## 5. References
-
-1. Stroop, J. R. (1935). Studies of interference in serial verbal reactions. *Journal of Experimental Psychology*, 18(6), 643-662.
-
-2. MacLeod, C. M. (1991). Half a century of research on the Stroop effect: An integrative review. *Psychological Bulletin*, 109(2), 163-203.
-
+The task is implemented for behavioral and EEG-compatible runs with explicit trigger coding for experiment boundaries, stimulus onset class, response channel, and feedback outcome.

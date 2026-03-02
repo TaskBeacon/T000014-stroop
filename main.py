@@ -130,9 +130,7 @@ def run(options: TaskRunOptions):
                 )
             ).wait_and_continue()
 
-        StimUnit("goodbye", win, kb, runtime=trigger_runtime).add_stim(stim_bank.get("good_bye")).wait_and_continue(
-            terminate=True
-        )
+        StimUnit("goodbye", win, kb, runtime=trigger_runtime).add_stim(stim_bank.get("good_bye")).wait_and_continue()
 
         trigger_runtime.send(settings.triggers.get("exp_end"))
 

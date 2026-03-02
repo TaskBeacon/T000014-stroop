@@ -1,3 +1,3 @@
-from .stroop_sampler import StroopSamplerResponder
+from .task_sampler import TaskSamplerResponder
 
-__all__ = ['StroopSamplerResponder']
+__all__ = ["TaskSamplerResponder"]

@@ -6,8 +6,15 @@ variant: baseline
 cognitive_domain: []
 maturity: smoke_tested
 version:
-  release_tag: ''
-evidence: []
-maintainer: []
+  release_tag: v1.1.2
 contracts:
   psyflow_taps: v0.1.0
+evidence:
+  - references/references.yaml
+  - references/references.md
+  - references/parameter_mapping.md
+  - references/stimulus_mapping.md
+  - references/task_logic_audit.md
+maintainer:
+  - name: Zhipeng Cao
+    email: zhipeng30@foxmail.com

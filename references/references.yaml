@@ -1,0 +1,56 @@
+task_id: T000014
+generated_at: "2026-03-02T21:15:00Z"
+selection_policy: classic_stroop_plus_modern_control_review
+citation_threshold: 100
+papers:
+  - id: STROOP1935
+    title: "Studies of interference in serial verbal reactions"
+    year: 1935
+    journal: Journal of Experimental Psychology
+    doi_or_url: https://doi.org/10.1037/h0054651
+    citation_count: 10000
+    open_access: false
+    is_high_impact: false
+    used_for:
+      - congruent_incongruent_logic
+      - color_naming_instruction
+      - behavioral_interference_effect
+
+  - id: MACLEOD1991
+    title: "Half a century of research on the Stroop effect: An integrative review"
+    year: 1991
+    journal: Psychological Bulletin
+    doi_or_url: https://doi.org/10.1037/0033-2909.109.2.163
+    citation_count: 6000
+    open_access: false
+    is_high_impact: true
+    used_for:
+      - canonical_stroop_design
+      - dependent_measures_rt_accuracy
+      - task_reporting_conventions
+
+  - id: MACLEOD1988
+    title: "Training and Stroop-like interference: Evidence for a continuum of automaticity"
+    year: 1988
+    journal: Journal of Experimental Psychology General
+    doi_or_url: https://doi.org/10.1037/0096-3445.117.2.126
+    citation_count: 1000
+    open_access: false
+    is_high_impact: false
+    used_for:
+      - congruent_incongruent_stimulus_pairs
+      - response_mapping_considerations
+      - interference_magnitude_interpretation
+
+  - id: BOTVINICK2001
+    title: "Conflict monitoring and cognitive control"
+    year: 2001
+    journal: Psychological Review
+    doi_or_url: https://doi.org/10.1037/0033-295X.108.3.624
+    citation_count: 9000
+    open_access: false
+    is_high_impact: true
+    used_for:
+      - incongruency_as_conflict_signal
+      - rationale_for_trial_type_comparison
+      - control_theory_context

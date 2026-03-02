@@ -5,8 +5,8 @@ from typing import Any
 from psyflow.sim.contracts import Action, Feedback, Observation, SessionInfo
 
 
-class StroopSamplerResponder:
-    """Task-specific Stroop sampler responder."""
+class TaskSamplerResponder:
+    """Task-specific sampler responder for Stroop."""
 
     def __init__(
         self,
@@ -65,18 +65,18 @@ class StroopSamplerResponder:
         if phase in ("instruction_text", "block", "goodbye", "block_feedback"):
             key = self._pick_key(valid_keys)
             if key is None:
-                return Action(key=None, rt_s=None, meta={"source": "stroop_sampler", "reason": "no_valid_key"})
-            return Action(key=key, rt_s=max(0.01, self.continue_rt_s), meta={"source": "stroop_sampler", "phase": phase})
+                return Action(key=None, rt_s=None, meta={"source": "task_sampler", "reason": "no_valid_key"})
+            return Action(key=key, rt_s=max(0.01, self.continue_rt_s), meta={"source": "task_sampler", "phase": phase})
 
-        if phase != "target" or self._rng is None:
-            return Action(key=None, rt_s=None, meta={"source": "stroop_sampler", "phase": phase, "reason": "withhold"})
+        if phase not in ("stimulus", "stroop_response") or self._rng is None:
+            return Action(key=None, rt_s=None, meta={"source": "task_sampler", "phase": phase, "reason": "withhold"})
 
         condition = str(obs.condition_id or "").strip().lower()
         congruent = condition.startswith("congruent")
         correct_key = self.red_key if condition.endswith("red") else self.green_key
 
         if float(self._rng.random()) < self.p_miss:
-            return Action(key=None, rt_s=None, meta={"source": "stroop_sampler", "condition": condition, "outcome": "miss"})
+            return Action(key=None, rt_s=None, meta={"source": "task_sampler", "condition": condition, "outcome": "miss"})
 
         p_correct = self.p_correct_congruent if congruent else self.p_correct_incongruent
         if float(self._rng.random()) <= p_correct:
@@ -87,15 +87,15 @@ class StroopSamplerResponder:
             key = self._pick_key(alt_keys)
             outcome = "error"
             if key is None:
-                return Action(key=None, rt_s=None, meta={"source": "stroop_sampler", "condition": condition, "outcome": "miss"})
+                return Action(key=None, rt_s=None, meta={"source": "task_sampler", "condition": condition, "outcome": "miss"})
 
         mean_s = self.rt_congruent_mean_s if congruent else self.rt_incongruent_mean_s
         rt_s = self._sample_rt(mean_s)
         deadline = self._deadline(obs)
         if deadline is not None and rt_s > deadline:
-            return Action(key=None, rt_s=None, meta={"source": "stroop_sampler", "condition": condition, "outcome": "late"})
+            return Action(key=None, rt_s=None, meta={"source": "task_sampler", "condition": condition, "outcome": "late"})
 
-        return Action(key=key, rt_s=rt_s, meta={"source": "stroop_sampler", "condition": condition, "outcome": outcome})
+        return Action(key=key, rt_s=rt_s, meta={"source": "task_sampler", "condition": condition, "outcome": outcome})
 
     def on_feedback(self, fb: Feedback) -> None:
         return None

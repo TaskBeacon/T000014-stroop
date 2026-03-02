@@ -200,7 +200,7 @@ sim:
   default_rt_s: 0.2
   clamp_rt: false
   responder:
-    type: responders.stroop_sampler:StroopSamplerResponder
+    type: responders.task_sampler:TaskSamplerResponder
     kwargs:
       red_key: f
       green_key: j
