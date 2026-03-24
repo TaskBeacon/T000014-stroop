@@ -29,6 +29,8 @@ This Stroop implementation presents Chinese color words in either congruent or i
 
 ## 2. Task Flow
 
+![Task Flow](task_flow.png)
+
 ### Block-Level Flow
 
 | Step | Description |

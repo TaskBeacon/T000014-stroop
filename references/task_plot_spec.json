@@ -1,0 +1,500 @@
+{
+  "task_plot_spec": {
+    "spec_version": "0.2",
+    "meta": {
+      "task_name": "Stroop Task",
+      "mode": "existing",
+      "task_id": "T000014"
+    },
+    "figure": {
+      "output": {
+        "filename": "task_flow.png",
+        "dpi": 300,
+        "width_in": 16.0,
+        "auto_width": true,
+        "background": "white"
+      },
+      "layout": {
+        "max_conditions": 4,
+        "screens_per_timeline": 4,
+        "screen_overlap_ratio": 0.1,
+        "screen_slope": 0.08,
+        "screen_slope_deg": 25.0,
+        "timeline_gap": 0.18,
+        "screen_aspect_ratio": 1.4545454545454546,
+        "left_margin": 0.2,
+        "right_margin": 0.03,
+        "top_margin": 0.03,
+        "bottom_margin": 0.05,
+        "condition_label_gap": 0.014,
+        "phase_label_pad": 0.01,
+        "duration_label_gap": 0.006,
+        "timeline_arrow_gap": 0.01,
+        "timeline_arrow_screen_clearance": 0.007,
+        "timeline_arrow_text_clearance": 0.01,
+        "timeline_arrow_extra_per_screen": 0.015,
+        "timeline_arrow_min_y": 0.02,
+        "timeline_arrow_max_y": 0.96
+      }
+    },
+    "timelines": [
+      {
+        "condition": "congruent_red",
+        "display_condition_label": "Congruent Red",
+        "phases": [
+          {
+            "phase_name": "pre_stim_fixation",
+            "display_phase_label": "Fixation",
+            "duration_ms": {
+              "fixed": 500
+            },
+            "response_window_ms": null,
+            "display_timing_label": "500 ms",
+            "stim_ids": [
+              "fixation"
+            ],
+            "stimulus_example": {
+              "summary": "+",
+              "modality": "visual",
+              "draw_hint": "text",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "+",
+                  "color": "white",
+                  "height": 1.5
+                }
+              ]
+            },
+            "notes": "pre-target fixation"
+          },
+          {
+            "phase_name": "stroop_response",
+            "display_phase_label": "Stroop Response",
+            "duration_ms": {
+              "fixed": 2000
+            },
+            "response_window_ms": {
+              "fixed": 2000
+            },
+            "display_timing_label": "2000 ms",
+            "stim_ids": [
+              "congruent_red"
+            ],
+            "stimulus_example": {
+              "summary": "红",
+              "modality": "visual",
+              "draw_hint": "text",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "红",
+                  "color": "red",
+                  "font": "SimHei",
+                  "height": 1.5
+                }
+              ]
+            },
+            "notes": "respond to ink color and ignore word meaning"
+          },
+          {
+            "phase_name": "feedback",
+            "display_phase_label": "Feedback",
+            "duration_ms": {
+              "fixed": 500
+            },
+            "response_window_ms": null,
+            "display_timing_label": "500 ms",
+            "stim_ids": [
+              "correct_feedback",
+              "incorrect_feedback",
+              "no_response_feedback"
+            ],
+            "stimulus_example": {
+              "summary": "?? / ?? / ???",
+              "modality": "visual",
+              "draw_hint": "image_ref",
+              "render_items": [
+                {
+                  "kind": "image_ref",
+                  "path": "E:\\xhmhc\\TaskBeacon\\benchmark\\runs\\task_plot_redo\\T000014-stroop\\references\\stroop_feedback_outcomes.png",
+                  "label": "Stroop Feedback Outcomes"
+                }
+              ]
+            },
+            "notes": "outcome depends on response accuracy or timeout"
+          },
+          {
+            "phase_name": "iti",
+            "display_phase_label": "ITI",
+            "duration_ms": {
+              "range": [
+                800,
+                1200
+              ]
+            },
+            "response_window_ms": null,
+            "display_timing_label": "800-1200 ms",
+            "stim_ids": [],
+            "stimulus_example": {
+              "summary": "blank",
+              "modality": "other",
+              "draw_hint": "blank",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "",
+                  "color": "white"
+                }
+              ]
+            },
+            "notes": "blank interval"
+          }
+        ]
+      },
+      {
+        "condition": "congruent_green",
+        "display_condition_label": "Congruent Green",
+        "phases": [
+          {
+            "phase_name": "pre_stim_fixation",
+            "display_phase_label": "Fixation",
+            "duration_ms": {
+              "fixed": 500
+            },
+            "response_window_ms": null,
+            "display_timing_label": "500 ms",
+            "stim_ids": [
+              "fixation"
+            ],
+            "stimulus_example": {
+              "summary": "+",
+              "modality": "visual",
+              "draw_hint": "text",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "+",
+                  "color": "white",
+                  "height": 1.5
+                }
+              ]
+            },
+            "notes": "pre-target fixation"
+          },
+          {
+            "phase_name": "stroop_response",
+            "display_phase_label": "Stroop Response",
+            "duration_ms": {
+              "fixed": 2000
+            },
+            "response_window_ms": {
+              "fixed": 2000
+            },
+            "display_timing_label": "2000 ms",
+            "stim_ids": [
+              "congruent_green"
+            ],
+            "stimulus_example": {
+              "summary": "绿",
+              "modality": "visual",
+              "draw_hint": "text",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "绿",
+                  "color": "green",
+                  "font": "SimHei",
+                  "height": 1.5
+                }
+              ]
+            },
+            "notes": "respond to ink color and ignore word meaning"
+          },
+          {
+            "phase_name": "feedback",
+            "display_phase_label": "Feedback",
+            "duration_ms": {
+              "fixed": 500
+            },
+            "response_window_ms": null,
+            "display_timing_label": "500 ms",
+            "stim_ids": [
+              "correct_feedback",
+              "incorrect_feedback",
+              "no_response_feedback"
+            ],
+            "stimulus_example": {
+              "summary": "?? / ?? / ???",
+              "modality": "visual",
+              "draw_hint": "image_ref",
+              "render_items": [
+                {
+                  "kind": "image_ref",
+                  "path": "E:\\xhmhc\\TaskBeacon\\benchmark\\runs\\task_plot_redo\\T000014-stroop\\references\\stroop_feedback_outcomes.png",
+                  "label": "Stroop Feedback Outcomes"
+                }
+              ]
+            },
+            "notes": "outcome depends on response accuracy or timeout"
+          },
+          {
+            "phase_name": "iti",
+            "display_phase_label": "ITI",
+            "duration_ms": {
+              "range": [
+                800,
+                1200
+              ]
+            },
+            "response_window_ms": null,
+            "display_timing_label": "800-1200 ms",
+            "stim_ids": [],
+            "stimulus_example": {
+              "summary": "blank",
+              "modality": "other",
+              "draw_hint": "blank",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "",
+                  "color": "white"
+                }
+              ]
+            },
+            "notes": "blank interval"
+          }
+        ]
+      },
+      {
+        "condition": "incongruent_red",
+        "display_condition_label": "Incongruent Red",
+        "phases": [
+          {
+            "phase_name": "pre_stim_fixation",
+            "display_phase_label": "Fixation",
+            "duration_ms": {
+              "fixed": 500
+            },
+            "response_window_ms": null,
+            "display_timing_label": "500 ms",
+            "stim_ids": [
+              "fixation"
+            ],
+            "stimulus_example": {
+              "summary": "+",
+              "modality": "visual",
+              "draw_hint": "text",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "+",
+                  "color": "white",
+                  "height": 1.5
+                }
+              ]
+            },
+            "notes": "pre-target fixation"
+          },
+          {
+            "phase_name": "stroop_response",
+            "display_phase_label": "Stroop Response",
+            "duration_ms": {
+              "fixed": 2000
+            },
+            "response_window_ms": {
+              "fixed": 2000
+            },
+            "display_timing_label": "2000 ms",
+            "stim_ids": [
+              "incongruent_red"
+            ],
+            "stimulus_example": {
+              "summary": "绿",
+              "modality": "visual",
+              "draw_hint": "text",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "绿",
+                  "color": "red",
+                  "font": "SimHei",
+                  "height": 1.5
+                }
+              ]
+            },
+            "notes": "respond to ink color and ignore word meaning"
+          },
+          {
+            "phase_name": "feedback",
+            "display_phase_label": "Feedback",
+            "duration_ms": {
+              "fixed": 500
+            },
+            "response_window_ms": null,
+            "display_timing_label": "500 ms",
+            "stim_ids": [
+              "correct_feedback",
+              "incorrect_feedback",
+              "no_response_feedback"
+            ],
+            "stimulus_example": {
+              "summary": "?? / ?? / ???",
+              "modality": "visual",
+              "draw_hint": "image_ref",
+              "render_items": [
+                {
+                  "kind": "image_ref",
+                  "path": "E:\\xhmhc\\TaskBeacon\\benchmark\\runs\\task_plot_redo\\T000014-stroop\\references\\stroop_feedback_outcomes.png",
+                  "label": "Stroop Feedback Outcomes"
+                }
+              ]
+            },
+            "notes": "outcome depends on response accuracy or timeout"
+          },
+          {
+            "phase_name": "iti",
+            "display_phase_label": "ITI",
+            "duration_ms": {
+              "range": [
+                800,
+                1200
+              ]
+            },
+            "response_window_ms": null,
+            "display_timing_label": "800-1200 ms",
+            "stim_ids": [],
+            "stimulus_example": {
+              "summary": "blank",
+              "modality": "other",
+              "draw_hint": "blank",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "",
+                  "color": "white"
+                }
+              ]
+            },
+            "notes": "blank interval"
+          }
+        ]
+      },
+      {
+        "condition": "incongruent_green",
+        "display_condition_label": "Incongruent Green",
+        "phases": [
+          {
+            "phase_name": "pre_stim_fixation",
+            "display_phase_label": "Fixation",
+            "duration_ms": {
+              "fixed": 500
+            },
+            "response_window_ms": null,
+            "display_timing_label": "500 ms",
+            "stim_ids": [
+              "fixation"
+            ],
+            "stimulus_example": {
+              "summary": "+",
+              "modality": "visual",
+              "draw_hint": "text",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "+",
+                  "color": "white",
+                  "height": 1.5
+                }
+              ]
+            },
+            "notes": "pre-target fixation"
+          },
+          {
+            "phase_name": "stroop_response",
+            "display_phase_label": "Stroop Response",
+            "duration_ms": {
+              "fixed": 2000
+            },
+            "response_window_ms": {
+              "fixed": 2000
+            },
+            "display_timing_label": "2000 ms",
+            "stim_ids": [
+              "incongruent_green"
+            ],
+            "stimulus_example": {
+              "summary": "红",
+              "modality": "visual",
+              "draw_hint": "text",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "红",
+                  "color": "green",
+                  "font": "SimHei",
+                  "height": 1.5
+                }
+              ]
+            },
+            "notes": "respond to ink color and ignore word meaning"
+          },
+          {
+            "phase_name": "feedback",
+            "display_phase_label": "Feedback",
+            "duration_ms": {
+              "fixed": 500
+            },
+            "response_window_ms": null,
+            "display_timing_label": "500 ms",
+            "stim_ids": [
+              "correct_feedback",
+              "incorrect_feedback",
+              "no_response_feedback"
+            ],
+            "stimulus_example": {
+              "summary": "?? / ?? / ???",
+              "modality": "visual",
+              "draw_hint": "image_ref",
+              "render_items": [
+                {
+                  "kind": "image_ref",
+                  "path": "E:\\xhmhc\\TaskBeacon\\benchmark\\runs\\task_plot_redo\\T000014-stroop\\references\\stroop_feedback_outcomes.png",
+                  "label": "Stroop Feedback Outcomes"
+                }
+              ]
+            },
+            "notes": "outcome depends on response accuracy or timeout"
+          },
+          {
+            "phase_name": "iti",
+            "display_phase_label": "ITI",
+            "duration_ms": {
+              "range": [
+                800,
+                1200
+              ]
+            },
+            "response_window_ms": null,
+            "display_timing_label": "800-1200 ms",
+            "stim_ids": [],
+            "stimulus_example": {
+              "summary": "blank",
+              "modality": "other",
+              "draw_hint": "blank",
+              "render_items": [
+                {
+                  "kind": "text",
+                  "text": "",
+                  "color": "white"
+                }
+              ]
+            },
+            "notes": "blank interval"
+          }
+        ]
+      }
+    ],
+    "legend": []
+  }
+}
